@@ -1,32 +1,7 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.7.6"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 4
-}
+def load_indeed_jobs_div(job_title, location):
+    getVars = {'q' : job_title, 'l' : location, 'fromage' : 'last', 'sort' : 'date'}
+    url = ('https://www.indeed.com/jobs?' + urllib.parse.urlencode(getVars))
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
+    job_soup = soup.find(id="resultsCol")
+    return job_soup
